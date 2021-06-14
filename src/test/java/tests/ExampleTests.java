@@ -4,10 +4,7 @@ import base.TestBase;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.ExampleInsertTextPage;
 import pages.ExampleSubElementPage;
 import pages.ExampleWasLoadedOrInteractivePage;
@@ -16,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class ExampleTests extends TestBase{
+
 
     @BeforeClass
     public void setUp(){
