@@ -27,7 +27,6 @@ public class YahooTest extends TestBase {
     @BeforeClass(description = "Uruchomienie przeglądarki, Przejście do strony logowania")
     public void setUp(){
         initialization();
-        driver.get("https://login.yahoo.com/");
         yahooPage = new YahooPage(driver);
     }
     /*public void setUp() {
@@ -39,16 +38,17 @@ public class YahooTest extends TestBase {
 
     /*
      * Test polegający na sprawdzeniu tytułu wczytanej strony
-     * */
+     *
     @Test(priority = 0, description = "Strona logowania")
     public void homeTest() {
         String title = yahooPage.validateLoginPageTitle();
         Assert.assertEquals(title, "Yahoo");
-    }
+    }*/
 
 
     @Test(priority = 0, description = "Test logowania oraz wylogowania", dataProvider = "testData")
     public void loginLogoutTest(String email, String password){
+        driver.get("https://login.yahoo.com/");
         YahooPage loginPage = YahooPage.init(driver);
         loginPage.email_ver2(email);
         loginPage.pswd(password);

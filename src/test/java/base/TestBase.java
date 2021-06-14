@@ -3,9 +3,7 @@ package base;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import sun.awt.windows.WEmbeddedFrame;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -274,6 +272,25 @@ public class TestBase {
         ArrayList<String> currentWindowHandles = getWindowHandlesAsArrayList(driver);
         int lastPosition = currentWindowHandles.size()-1;
         return currentWindowHandles.get(lastPosition);
+    }
+
+    public boolean clickUntilInteractable(WebElement element, long timeOutInSeconds){
+        long startTime = System.currentTimeMillis();
+
+        boolean success = false;
+        while(!success && !this.isTimeout(startTime, timeOutInSeconds))
+        try{
+            element.click();
+            success = true;
+        }catch (ElementNotInteractableException e){
+            try {
+                System.out.println("w pętli");
+                Thread.sleep(50);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return success;
     }
 
 }

@@ -1,12 +1,13 @@
 package pages;
 
+import base.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class Yahoo_PageFactory_Page {
+public class Yahoo_PageFactory_Page extends TestBase {
     private WebDriver driver;
     private static int numberTest = 0;
 
@@ -28,7 +29,7 @@ public class Yahoo_PageFactory_Page {
     @FindBy(id = "profile-signout-link")
     WebElement logoutButton;
 
-    @FindBy(css = "#account-switcher > div.bottom-cta > a")
+    @FindBy(css = "#ybarAccountMenuOpener > span")
     WebElement anotherAccountButton;
 
 
@@ -77,8 +78,8 @@ public class Yahoo_PageFactory_Page {
 
 
     public Yahoo_PageFactory_Page logout(){
-        profileMenuButton.click();
-        logoutButton.click();
+        super.clickUntilInteractable(anotherAccountButton,10);
+        super.clickUntilInteractable(logoutButton,10);
         return new Yahoo_PageFactory_Page(driver);
     }
 

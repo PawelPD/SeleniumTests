@@ -1,10 +1,11 @@
 package pages;
 
+import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class YahooPage {
+public class YahooPage extends TestBase{
     private WebDriver driver;
     private static int numberTest = 0;
 
@@ -61,8 +62,8 @@ public class YahooPage {
     }
 
     public YahooPage logout(){
-        driver.findElement(profileMenuButton).click();
-        driver.findElement(logoutButton).click();
+        super.clickUntilInteractable(driver.findElement(profileMenuButton),10);
+        super.clickUntilInteractable(driver.findElement(logoutButton),10);
         return new YahooPage(driver);
     }
 
