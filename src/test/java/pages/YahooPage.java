@@ -6,16 +6,15 @@ import org.openqa.selenium.WebElement;
 
 public class YahooPage {
     private WebDriver driver;
+    private static int numberTest = 0;
 
     private By usernameField = By.id("login-username");
-    private By loginButton = By.id("login-signin");
     private By passwordField = By.id("login-passwd");
+    private By loginButton = By.id("login-signin");
     private By passwordButton = By.name("verifyPassword");
     private By profileMenuButton = By.id("ybarAccountMenuOpener");
     private By logoutButton = By.id("profile-signout-link");
-    private By anotherAccount = By.cssSelector("#account-switcher > div.bottom-cta > a");
-    private static int numberTest = 0;
-
+    private By anotherAccountButton = By.cssSelector("#account-switcher > div.bottom-cta > a");
 
 
     public YahooPage(WebDriver driver) {
@@ -32,7 +31,7 @@ public class YahooPage {
             element.clear();
             element.sendKeys(username);
         }catch (Exception e){
-            driver.findElement(anotherAccount).click();
+            driver.findElement(anotherAccountButton).click();
             WebElement element = driver.findElement(usernameField);
             element.clear();
             element.sendKeys(username);
@@ -44,7 +43,7 @@ public class YahooPage {
     public YahooPage email_ver2(String username) {
         numberTest++;
         if(numberTest > 1){
-            driver.findElement(anotherAccount).click();
+            driver.findElement(anotherAccountButton).click();
         }
         WebElement element = driver.findElement(usernameField);
         element.clear();
@@ -52,9 +51,6 @@ public class YahooPage {
         driver.findElement(loginButton).click();
         return new YahooPage(driver);
     }
-
-
-
 
     public YahooPage pswd(String psw) {
         WebElement element = driver.findElement(passwordField);
@@ -68,5 +64,9 @@ public class YahooPage {
         driver.findElement(profileMenuButton).click();
         driver.findElement(logoutButton).click();
         return new YahooPage(driver);
+    }
+
+    public String validateLoginPageTitle() {
+        return driver.getTitle();
     }
 }

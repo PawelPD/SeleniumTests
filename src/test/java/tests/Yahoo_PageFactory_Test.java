@@ -4,22 +4,13 @@ import base.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.YahooPage;
+import pages.Yahoo_PageFactory_Page;
 
-public class YahooTest extends TestBase {
+public class Yahoo_PageFactory_Test extends TestBase {
     //private WebDriver driver;
-    private YahooPage yahooPage;
+    private Yahoo_PageFactory_Page yahoo_pageFactory_page;
 
-    @DataProvider
-    public Object[][] testData(){
-        return new Object[][]{
-                new Object[] {"paweltestmail.com", "pawelSM1"},
-                new Object[] {"paweltestmai2.com", "pawelSM2"},
-                new Object[] {"paweltestmai3.com", "pawelSM3"},
-                new Object[] {"paweltestmail.com", "pawelSM1"},};
-    }
 
     /*
      * Funkcja wykonywana przed każdym testem
@@ -28,7 +19,7 @@ public class YahooTest extends TestBase {
     public void setUp(){
         initialization();
         driver.get("https://login.yahoo.com/");
-        yahooPage = new YahooPage(driver);
+        yahoo_pageFactory_page = new Yahoo_PageFactory_Page(driver);
     }
     /*public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
@@ -42,16 +33,16 @@ public class YahooTest extends TestBase {
      * */
     @Test(priority = 0, description = "Strona logowania")
     public void homeTest() {
-        String title = yahooPage.validateLoginPageTitle();
+        String title = yahoo_pageFactory_page.validateLoginPageTitle();
         Assert.assertEquals(title, "Yahoo");
     }
 
 
-    @Test(priority = 0, description = "Test logowania oraz wylogowania", dataProvider = "testData")
-    public void loginLogoutTest(String email, String password){
-        YahooPage loginPage = YahooPage.init(driver);
-        loginPage.email_ver2(email);
-        loginPage.pswd(password);
+    @Test(priority = 0, description = "Test logowania oraz wylogowania")
+    public void loginLogoutTest(){
+        Yahoo_PageFactory_Page loginPage = Yahoo_PageFactory_Page.init(driver);
+        loginPage.email_ver2("paweltestmail1");
+        loginPage.pswd("pawelSM1");
         Assert.assertEquals(driver.getTitle(),"Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos");
         loginPage.logout();
     }
